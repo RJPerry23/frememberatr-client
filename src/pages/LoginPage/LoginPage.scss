@@ -37,6 +37,14 @@
             color: #FFFFFF;
             position: relative;
             bottom: 5rem;
+
+            &--alt{
+                font-size: 1.5rem;
+                font-weight: 400;
+                color: #27187E;
+                position: relative;
+                bottom: 5rem;    
+            }
         }
 
         &--username{
@@ -48,7 +56,36 @@
             padding: 0.5rem 0 0.5rem 0;
             background-color: #AEB8FE;
 
+            &--alt{
+                text-align: center;
+                position: relative;
+                bottom: 5rem;
+                border-radius: 5px;
+                border: 2px solid #27187E;
+                padding: 0.5rem 0 0.5rem 0;
+                background-color: #27187E;
+                color: #AEB8FE;
+
+                &::placeholder{
+                    font-family: Arial, Helvetica, sans-serif;
+                    text-align: center;
+                    font-size: 0.8rem;
+                    color: #AEB8FE;
+                }
+    
+                &:hover{
+                    cursor: pointer;
+                    border: 2px solid #eeb752;
+                }
+    
+                &:focus{
+                    outline: none;
+                    border: 2px solid #eeb752;
+                }  
+            }
+
             &::placeholder{
+                font-family: Arial, Helvetica, sans-serif;
                 text-align: center;
                 font-size: 0.8rem;
                 color: #000000;
@@ -74,7 +111,36 @@
             padding: 0.5rem 0 0.5rem 0;
             background-color: #AEB8FE;
 
+            &--alt{
+                text-align: center;
+                position: relative;
+                bottom: 4.5rem;
+                border-radius: 5px;
+                border: 2px solid #27187E;
+                padding: 0.5rem 0 0.5rem 0;
+                background-color: #27187E;
+                color: #AEB8FE;
+
+                &::placeholder{
+                    font-family: Arial, Helvetica, sans-serif;
+                    text-align: center;
+                    font-size: 0.8rem;
+                    color: #AEB8FE;
+                }    
+    
+                &:hover{
+                    cursor: pointer;
+                    border: 2px solid #eeb752;
+                }
+    
+                &:focus{
+                    outline: none;
+                    border: 2px solid #eeb752;
+                }    
+            }
+
             &::placeholder{
+                font-family: Arial, Helvetica, sans-serif;
                 text-align: center;
                 font-size: 0.8rem;
                 color: #000000;
@@ -100,26 +166,172 @@
             padding: 0.25rem 1rem 0.25rem 1rem;
             background-color: #AEB8FE;
 
+            &--alt{
+                text-align: center;
+                position: relative;
+                bottom: 3rem;
+                border-radius: 5px;
+                border: 2px solid #27187E;
+                background-color: #27187E;
+                color: #AEB8FE;
+                padding: 0.25rem 1rem 0.25rem 1rem;
+
+                &:hover{
+                    font-family: Arial, Helvetica, sans-serif;
+                    cursor: pointer;
+                    border: 2px solid #eeb752;
+                }    
+            }
+
             &:hover{
+                font-family: Arial, Helvetica, sans-serif;
                 cursor: pointer;
                 border: 2px solid #27187E;
             }
         }
     }
 
-    &__sign-up{
-        margin: 0 0 1rem 0;
-        font-size: 1.2rem;
-        color: #FFFFFF;
+    &__error{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        position: relative;
+        bottom: 3.75rem;
+        animation: morph 0.5s infinite;
+        font-weight: 600;
+    }
 
-        &--link{
-            margin: 0;
+    &__bottom{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &--sign-up{
+            margin: 0 0 1rem 0;
+            font-size: 1.2rem;
+            color: #FFFFFF;    
+
+
+            &--alt{
+                margin: 0 0 1rem 0;
+                font-size: 1.2rem;
+                color: #27187E;
+            }
+    
+            &--link{
+                font-size: 1.2rem;
+                margin: 0;
+
+                &--alt{
+                    font-size: 1.2rem;
+                    margin: 0;
+                    color: #27187E;
+
+                    &:hover{
+                        cursor: pointer;
+                        color: #2361d5;
+                    }
+                }
+    
+                &:hover{
+                    cursor: pointer;
+                    color: #27187E;
+                }
+            }
+        }
+    
+        &--button{
+            margin-top: 2rem;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 300;
+            text-align: center;
+            border: 2px solid #AEB8FE;
+            background-color: #AEB8FE;
+            border-radius: 5px;
+
+            &--alt{
+                margin-top: 2rem;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 300;
+                text-align: center;
+                border: 2px solid #27187E;
+                background-color: #27187E;
+                color: #AEB8FE;
+                border-radius: 5px;  
+                
+                &:hover{
+                    cursor: pointer;
+                    border: 2px solid #eeb752;
+                }
+            }
 
             &:hover{
                 cursor: pointer;
-                color: #27187E;
+                border: 2px solid #27187E;
             }
-        }
+          }
+    
     }
-
 }
+
+.test {
+    width: auto;
+    border-radius: 5px;
+    min-height: 568px;
+    max-height: auto;
+    color: #fff;
+    background: linear-gradient(-45deg, #eeb752, #e93bc3, #2361d5, #22e0b7);
+    background-size: 600% 600%;
+    -webkit-animation: Gradient 30s linear infinite;
+    -moz-animation: Gradient 30s linear infinite;
+    animation: Gradient 30s linear infinite;
+    }
+  
+  .paused {
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+    background: #AEB8FE;
+  }
+  
+  @-webkit-keyframes Gradient {
+    0% {
+    background-position: 0% 0%
+    }
+  50% {
+  background-position: 100% 100%
+  }
+  100% {
+  background-position: 0% 0%
+  }
+  }
+  
+  @-moz-keyframes Gradient {
+    0% {
+    background-position: 0% 0%
+    }
+  50% {
+  background-position: 100% 100%
+  }
+  100% {
+  background-position: 0% 0%
+  }
+  }
+  
+  @keyframes Gradient {
+    0% {
+    background-position: 0% 0%
+    }
+  50% {
+  background-position: 100% 100%
+  }
+  100% {
+  background-position: 0% 0%
+  }
+  }
+    
+  @keyframes morph {
+    0% { color: red; }
+    50% { color: rgb(252, 235, 8); }
+    100% { color: red; }
+  }

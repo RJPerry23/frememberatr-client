@@ -1,55 +1,171 @@
 import './LoginPage.scss'
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Logo from '../../assets/images/logos/Frememberatr_logo.png'
+import axios from 'axios';
+
+const API_URL = process.env.REACT_APP_API_URL
 
 class LoginPage extends Component {
 
-    hidePlaceHolder = (e) => {
-        e.target.placeholder = ""
+    state = {
+      animationClass: 'test',
+      logInError: "",
+      logInSuccess: false,
+      userId: null,
+      // flashErrorMessage: false,
+      // flasher: false
     }
 
-    resetForm = () => {
-        const form = document.getElementById("login")
-        form.reset()
+    //For background animation
+    constructor (props) {
+        super(props);
+        this.state = {
+          animationClass: 'test'
+        }
+        this.animationState = this.animationState.bind(this);
+      }
+      
+      animationState(){
+        if(this.state.animationClass === 'test'){
+          this.setState({
+            animationClass: 'test paused'
+          });
+        }else{
+          this.setState({
+            animationClass: 'test'
+          });
+        }
+      }  
+
+    hidePlaceHolder = (event) => {
+        event.target.placeholder = ""
     }
 
-    handleLogin = (e) => {
-        e.preventDefault()
+    handleLogin = (event) => {
+        event.preventDefault()
+        const username = event.target.username.value
+        const password = event.target.password.value
+      axios.post(API_URL + '/users/login', {
+        username,
+        password
+      })
+      .then((response) => {
+        sessionStorage.setItem("token", response.data.token)
+        this.setState({
+          success: true,
+          logInError: "",
+          userId: response.data.id
+        })
+      })
+      .catch((err) => {
+        this.setState({
+          logInError: err.response.data,
+        })
+      })
     }
+
+    // componentDidMount(){
+    //     this.flashTimer = setInterval(() => this.flash(), 1000)      
+    // }
+
+    // componentWillUnmount() {
+    //   clearInterval(this.flashTimer);
+    // }
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //   console.log(this.state.flasher);
+    //   console.log(this.nextState);
+    //   if ((this.state.flasher !== nextState.flasher) &&
+    //   this.state.flashErrorMessage === 'true')
+    //   return nextState.flasher
+    // }
+
+    // flash = () => {
+    //   if (this.state.flasher === 'true'){
+    //     this.setState({
+    //       flasher: false
+    //     })  
+    //   } else {this.setState({
+    //     flasher: true
+    //   })}
+    // }
 
     render() {
         return (
-            <div className='login' onClick={this.resetForm}>
-                <img src={Logo} className='login__logo'/>
-                <form id='login' name='login' className='login__form'>
-                    <h1 className='login__form--heading'>"Friend - remember - ator"</h1>
-                    <input className='login__form--username'
+            <div className='login'>
+                <div className={this.state.animationClass}>
+                <img src={Logo} alt="Frememberatr logo" className='login__logo'/>
+                <form id='login' name='login' className='login__form'
+                onSubmit={this.handleLogin}>
+                    <h1 className={this.state.animationClass === "test"?
+                    'login__form--heading' :
+                    'login__form--heading--alt'}>
+                      "Friend - remember - ator"
+                      </h1>
+                    <input className={this.state.animationClass === "test"?
+                    'login__form--username' :
+                    'login__form--username--alt'}
                     type='text'
-                    placeholder='USERNAME'
+                    placeholder='Username'
                     htmlFor='login'
                     name='username'
                     id='username'
                     onClick={this.hidePlaceHolder}>
                     </input>
-                    <input className='login__form--password'
+                    <input className={this.state.animationClass === "test"?
+                    'login__form--password' :
+                    'login__form--password--alt'}
                     type='text'
-                    placeholder='PASSWORD'
+                    placeholder='Password'
                     htmlFor='login'
                     name='password'
                     id='password'
                     onClick={this.hidePlaceHolder}>
                     </input>
-                    <input className='login__form--submit'
+
+                    {this.state.logInError &&
+                      <p className={"login__error"}>
+                        {this.state.logInError}
+                      </p>}
+
+                    <input className={this.state.animationClass === "test"?
+                    'login__form--submit' :
+                    'login__form--submit--alt'}
                     type='submit'
-                    value='LOGIN'
-                    onSubmit={this.handleLogin}>
+                    value='Login'
+                    >
                     </input>
                 </form>
-                <p className='login__sign-up'>Don't have an account?</p>
-                <Link to="/signup" className='link'>
-                <p className='login__sign-up--link'>Click here to sign up.</p>
-                </Link>
+
+                {this.state.success && <Redirect to={"/profile/" + this.state.userId} />}
+
+
+                <div className='login__bottom'>
+                    <p className={this.state.animationClass === "test"?
+                    'login__bottom--sign-up' :
+                    'login__bottom--sign-up--alt'}>
+                      Don't have an account?
+                      </p>
+                    <Link to="/signup" className='link'>
+                    <p className={this.state.animationClass === "test"?
+                    'login__bottom--sign-up--link' : 
+                    'login__bottom--sign-up--link--alt'}>
+                      Click here to sign up.
+                      </p>
+                    </Link>
+
+                        {this.state.animationClass === "test"? 
+                            <button className='login__bottom--button'
+                            onClick={this.animationState}>
+                            Normal Mode
+                            </button> :
+                                <button className='login__bottom--button--alt'
+                                onClick={this.animationState}>
+                                Color Mode </button>}
+
+                </div>
+              </div>
             </div>
         );
     
