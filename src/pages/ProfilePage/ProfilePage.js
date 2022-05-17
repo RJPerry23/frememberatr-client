@@ -8,6 +8,8 @@ import EditOff from '../../assets/images/icons/edit_off.svg'
 import Explore from '../../assets/images/icons/explore.svg'
 import NotificationTrue from '../../assets/images/icons/notification_true.svg'
 import NotificationFalse from '../../assets/images/icons/notification_false.svg'
+import { DotPulse } from '@uiball/loaders'
+
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -50,11 +52,13 @@ class ProfilePage extends Component{
     //preloader
     if (!this.state.profile) {
         return (
-        <section>
-            <p className='preloader'>
-                ... Loading your profile ...
-            </p>
-        </section>
+            <div className='preloader'>
+            <DotPulse 
+            size={40}
+            speed={1.3} 
+            color="black" 
+            />
+            </div>
         )
     }
 
@@ -66,41 +70,53 @@ class ProfilePage extends Component{
                     alt={username}
                     className="profile__top--img"/>
                     <h1 className='profile__top--header'
-                    >{name}'s Profile</h1>
+                    >{name}</h1>
                 </div>
                 <div className='profile__middle'>
                     <div className='profile__middle--left'>
-                        <div>
-                            <img src={PersonSearch}
+                        <div className='profile__middle--left icons'>
+                            <img className='img'
+                            src={PersonSearch}
                             alt="person search"/>
                         </div>
-                        <div>
-                            <img src={Friend}
+                        <div className='profile__middle--left icons'>
+                            <img className='img'
+                            src={Friend}
                             alt="friend"/>
                         </div>
-                        <div>
-                            <img src={EditOff}
+                        <div className='profile__middle--left icons'>
+                            <img className='edit'
+                            src={EditOff}
                             alt="edit off"/>
                         </div>
-                        <div>
-                            <img src={Explore}
+                        <div className='profile__middle--left icons'>
+                            <img className='img'
+                            src={Explore}
                             alt="explore"/>
                         </div>
                         {this.state.friendRequests.length?
-                            <div><img src={NotificationTrue}/></div> :
-                                <div><img src={NotificationFalse}/></div>}
+                            <div className='profile__middle--left icons'>
+                                <img src={NotificationTrue} alt="you have notifications" 
+                                className='img'/></div> :
+                                <div className='profile__middle--left icons'>
+                                    <img src={NotificationFalse} alt="you do not have notifications"
+                                    className='img'/></div>}
                     </div>
                     <div className='profile__middle--right'>
-                        <h2>Likes</h2>
+                        <h3>Likes</h3>
                         {this.state.likes.map((like) => (
                             <p key={like.id}>{like.likes}</p>
                         ))}
-                        <h2>Dislikes</h2>
+                        <h3>Dislikes</h3>
                         {this.state.dislikes.map((dislike) => (
                             <p key={dislike.id}>{dislike.dislikes}</p>
                         ))}
                     </div>
                 </div>
+                <div className='profile__bottom'>
+                    <h3 className='profile__bottom--heading'>About</h3>
+                    <p className='profile__bottom--about'>{this.state.profile.about}</p>
+                </div>    
             </div>
         )
     }

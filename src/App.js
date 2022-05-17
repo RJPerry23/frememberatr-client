@@ -6,8 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import LoginPage from './pages/LoginPage/LoginPage'
 import SignUpPage from './pages/SignUpPage/SignUpPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
-
-const API_URL = process.env.REACT_APP_API_URL
+import DiscoverPage from './pages/DiscoverPage/DiscoverPage';
 
 class App extends Component {
 
@@ -19,6 +18,7 @@ class App extends Component {
             <Route path="/" exact component={LoginPage}/>
             <Route path="/signup" component={SignUpPage}/>
             <Route path="/profile/:user" component={ProfilePage}/>
+            <Route path="/discover/:user" component={DiscoverPage}/>
           </Switch>
           </BrowserRouter>
         </div>

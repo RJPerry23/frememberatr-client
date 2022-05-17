@@ -49,8 +49,56 @@
             background-color: #AEB8FE;
             border-radius: 10px;
             padding: 0.5rem 1rem 0.5rem 1rem;
+            width: 11.5rem;
+            text-align: center;
             position: relative;
             top: 0.5rem;
+        }
+    }
+
+    &__middle{
+        display: flex;
+        margin-top: 1rem;
+
+        &--left {
+            margin: 0.5rem 1rem 0 0;
+
+            .icons{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #FFFFFF;
+                border-radius: 50%;
+                width: 3rem;
+                height: 3rem;
+                margin-bottom: 1rem;
+
+                .img{
+                    height: 2rem;
+                    width: 2rem;
+                }
+
+                .edit{
+                    height: 1.75rem;
+                    width: 1.75rem;
+                }
+            }
+        }
+    }
+
+    &__bottom{
+        margin: 0 1rem 1rem 1rem;
+        background-color: #c23281;
+        border-radius: 5px;
+
+        &--heading{
+            margin: 1rem 0 0 1rem;
+            color: #FFFFFF;
+        }
+
+        &--about{
+            margin: 1rem 1rem 1rem 1rem;
+            color: #FFFFFF;
         }
     }
 }
