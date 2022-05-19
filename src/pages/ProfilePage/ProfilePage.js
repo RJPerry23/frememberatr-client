@@ -90,9 +90,11 @@ class ProfilePage extends Component{
                         </Link>
                         </div>
                         <div className='profile__middle--left icons'>
+                        <Link to={`/edit1/${this.state.profile.id}`}>
                             <img className='edit'
                             src={EditOff}
                             alt="edit off"/>
+                        </Link>
                         </div>
                         <div className='profile__middle--left icons'>
                             <img className='img'

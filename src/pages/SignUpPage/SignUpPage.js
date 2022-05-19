@@ -44,15 +44,12 @@ class SignUpPage extends Component {
     handleSignup = (event) => {
         event.preventDefault()
         if (this.state.username && this.state.password) {
-            console.log(event.target.username);
-            console.log(event.target.username.value);
             const newProfile = {
                 username: this.state.username,
                 password: this.state.password
             }
             axios.post(API_URL + '/users', newProfile)
             .then((response) => {
-                console.log(response.data);
                 axios.get(API_URL + '/users')
             })
         }
