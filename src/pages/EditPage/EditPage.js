@@ -1,12 +1,12 @@
-import './ProfilePage.scss'
+import './EditPage.scss'
 import React, { Component } from 'react';
-import GlobalProfilePage from '../../components/GlobalProfilePage/GlobalProfilePage';
-import PersonalProfilePage from '../../components/PersonalProfilePage/PersonalProfilePage';
 import axios from 'axios';
+import EditPage1 from '../../components/EditPage1/EditPage1'
+import ErrorEdit from '../../components/ErrorEdit/ErrorEdit';
 
 const API_URL = process.env.REACT_APP_API_URL
 
-class ProfilePage extends Component{
+class EditPage extends Component{
 
     state = {
         userAuthenticated: false
@@ -32,13 +32,12 @@ class ProfilePage extends Component{
         return (
             <div>
                 {this.state.userAuthenticated?
-                    <PersonalProfilePage
+                    <EditPage1
                     user={this.props.match.params.user}/> :
-                        <GlobalProfilePage
-                        user={this.props.match.params.user}/>}
+                        <ErrorEdit/>}
             </div>
         );    
     }
 };
 
-export default ProfilePage;
+export default EditPage;

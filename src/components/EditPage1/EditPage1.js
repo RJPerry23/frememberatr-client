@@ -9,7 +9,7 @@ import Delete from '../../assets/images/icons/Delete.svg'
 import Photo from '../../assets/images/icons/Photo.svg'
 import { DotPulse } from '@uiball/loaders'
 import { Link } from 'react-router-dom';
-import EditAbout from '../../components/EditAbout/EditAbout';
+import EditAbout from '../EditAbout/EditAbout';
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -25,7 +25,7 @@ class EditPage1 extends Component{
     }
 
     componentDidMount(){
-        const user = this.props.match.params.user
+        const user = this.props.user
         axios.get(`${API_URL}/users/${user}`)
         .then((response) => {
             this.setState({profile: response.data})
@@ -57,7 +57,7 @@ class EditPage1 extends Component{
 
     handleSubmitAbout = (event) => {
         event.preventDefault()
-        const user = this.props.match.params.user
+        const user = this.props.user
         if (event.target.aboutInput.value) {
             const newAbout = {
                 about: event.target.aboutInput.value
@@ -72,7 +72,7 @@ class EditPage1 extends Component{
     }
 
     componentDidUpdate(){
-        const user = this.props.match.params.user
+        const user = this.props.user
         axios.get(`${API_URL}/users/${user}`)
             .then((response) => {
                 this.setState({profile: response.data})
