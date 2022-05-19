@@ -9,6 +9,7 @@ import Explore from '../../assets/images/icons/explore.svg'
 import NotificationTrue from '../../assets/images/icons/notification_true.svg'
 import NotificationFalse from '../../assets/images/icons/notification_false.svg'
 import { DotPulse } from '@uiball/loaders'
+import { Link } from 'react-router-dom';
 
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -62,7 +63,7 @@ class ProfilePage extends Component{
         )
     }
 
-        const { name, username, profilePicture, id} = this.state.profile
+        const { name, username, profilePicture} = this.state.profile
         return(
             <div className='profile'>
                 <div className='profile__top'>
@@ -74,15 +75,19 @@ class ProfilePage extends Component{
                 </div>
                 <div className='profile__middle'>
                     <div className='profile__middle--left'>
+                            <div className='profile__middle--left icons'>
+                            <Link to={`/discover/${this.state.profile.id}`}>
+                                <img className='img'
+                                src={PersonSearch}
+                                alt="person search"/>
+                            </Link>
+                            </div>
                         <div className='profile__middle--left icons'>
-                            <img className='img'
-                            src={PersonSearch}
-                            alt="person search"/>
-                        </div>
-                        <div className='profile__middle--left icons'>
+                        <Link to={`/friendslist/${this.state.profile.id}`}>
                             <img className='img'
                             src={Friend}
                             alt="friend"/>
+                        </Link>
                         </div>
                         <div className='profile__middle--left icons'>
                             <img className='edit'
@@ -103,14 +108,27 @@ class ProfilePage extends Component{
                                     className='img'/></div>}
                     </div>
                     <div className='profile__middle--right'>
-                        <h3>Likes</h3>
-                        {this.state.likes.map((like) => (
-                            <p key={like.id}>{like.likes}</p>
-                        ))}
-                        <h3>Dislikes</h3>
-                        {this.state.dislikes.map((dislike) => (
-                            <p key={dislike.id}>{dislike.dislikes}</p>
-                        ))}
+                        <h3 className='profile__middle--right likes-heading'>
+                            Likes
+                        </h3>
+                        <div className='profile__middle--right likes-div'>
+                            {this.state.likes.map((like) => (
+                                <p key={like.id} className='profile__middle--right likes'>
+                                    {like.likes}
+                                </p>
+                            ))}
+                        </div>
+                        <h3 className='profile__middle--right dislikes-heading'>
+                            Dislikes
+                        </h3>
+                        <div className='profile__middle--right dislikes-div'>
+                            {this.state.dislikes.map((dislike) => (
+                                <p key={dislike.id} className='profile__middle--right dislikes'>
+                                    {dislike.dislikes}
+                                </p>
+                            ))}
+                        </div>
+
                     </div>
                 </div>
                 <div className='profile__bottom'>

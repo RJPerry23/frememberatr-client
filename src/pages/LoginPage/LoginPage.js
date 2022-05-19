@@ -65,32 +65,6 @@ class LoginPage extends Component {
       })
     }
 
-    // componentDidMount(){
-    //     this.flashTimer = setInterval(() => this.flash(), 1000)      
-    // }
-
-    // componentWillUnmount() {
-    //   clearInterval(this.flashTimer);
-    // }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //   console.log(this.state.flasher);
-    //   console.log(this.nextState);
-    //   if ((this.state.flasher !== nextState.flasher) &&
-    //   this.state.flashErrorMessage === 'true')
-    //   return nextState.flasher
-    // }
-
-    // flash = () => {
-    //   if (this.state.flasher === 'true'){
-    //     this.setState({
-    //       flasher: false
-    //     })  
-    //   } else {this.setState({
-    //     flasher: true
-    //   })}
-    // }
-
     render() {
         return (
             <div className='login'>

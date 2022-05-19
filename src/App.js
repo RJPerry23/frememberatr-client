@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import SignUpPage from './pages/SignUpPage/SignUpPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import DiscoverPage from './pages/DiscoverPage/DiscoverPage';
+import FriendsListPage from './pages/FriendsListPage/FriendsListPage';
 
 class App extends Component {
 
@@ -19,6 +20,7 @@ class App extends Component {
             <Route path="/signup" component={SignUpPage}/>
             <Route path="/profile/:user" component={ProfilePage}/>
             <Route path="/discover/:user" component={DiscoverPage}/>
+            <Route path="/friendslist/:user" component={FriendsListPage}/>
           </Switch>
           </BrowserRouter>
         </div>

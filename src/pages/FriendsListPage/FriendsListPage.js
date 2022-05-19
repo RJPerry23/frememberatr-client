@@ -1,16 +1,16 @@
-import './DiscoverPage.scss'
-import axios from 'axios';
 import React, { Component } from 'react';
+import './FriendsListPage.scss'
+import axios from 'axios';
 import { DotPulse } from '@uiball/loaders'
 import BlankPlaceholderPhoto from '../../assets/images/Blank3x2.jpg'
-import ProfilePreview from '../../components/ProfilePreview/ProfilePreview';
 import uuid from 'react-uuid';
 import { Link } from 'react-router-dom';
+import FriendsPreview from '../../components/FriendsPreview/FriendsPreview';
 import Search from '../../assets/images/icons/search.svg'
 
 const API_URL = process.env.REACT_APP_API_URL
 
-class DiscoverPage extends Component{
+class FriendsListPage extends Component {
 
     state = {
         profile: null,
@@ -50,33 +50,20 @@ class DiscoverPage extends Component{
         })
     }
 
-    findPossibleFriends = () => {
-        const user = this.state.profile.id
-        const profiles = []
-        this.state.profiles.forEach((profile) => {
-            if (profile.id !== user) {
-                profiles.push(profile.id)
-            }
+    findFriends = () => {
+        const friendIds = []
+        this.state.friends.forEach((friend) => {
+            friendIds.push(friend.profile_id)
         })
         const friends = []
-        for (let i=0;i<this.state.friends.length;i++) {
-            friends.push(this.state.friends[i].profile_id)
-        }
-        for (let j=0;j<friends.length;j++) {
-            if (profiles.includes(friends[j])){
-                profiles.splice(profiles.indexOf(friends[j]), 1)
-            }
-        }
-        const possibleProfiles = []
-        for (let r=0;r<profiles.length;r++){
+        for (let i=0;i<friendIds.length;i++) {
             for (let n=0;n<this.state.profiles.length;n++) {
-                if (this.state.profiles[n].id === profiles[r]){
-                    possibleProfiles.push(this.state.profiles[n])
+                if (this.state.profiles[n].id === friendIds[i]){
+                    friends.push(this.state.profiles[n])
                 }
             }
         }
-        return possibleProfiles.sort(() => Math.random() - 0.5)
-
+        return friends.sort(() => Math.random() - 0.5)
     }    
 
     handleInputChangeSearch = (event) => {
@@ -86,7 +73,7 @@ class DiscoverPage extends Component{
     }
 
     searchForFriends = () => {
-        const possibleFriends = this.findPossibleFriends()
+        const possibleFriends = this.findFriends()
         possibleFriends.forEach((friend) => {
             friend.name = friend.name.toLowerCase()
         })
@@ -97,7 +84,7 @@ class DiscoverPage extends Component{
         return searchResults
     }
 
-    render(){
+    render() {
     //preloader
     if (!this.state.profile) {
         return (
@@ -110,41 +97,41 @@ class DiscoverPage extends Component{
             </div>
         )
     }
-    const newPossibleFriends = this.findPossibleFriends().slice(0, 5);
-    const searchResults = this.searchForFriends()
-    const { name, username, profilePicture, id} = this.state.profile
+const friends = this.findFriends().slice(0, 5)
+const searchResults = this.searchForFriends()
+const { name, username, profilePicture, id} = this.state.profile
         return (
-            <div className='discover'>
-                <div className='discover__top'>
+            <div className='friendslist'>
+                <div className='friendslist__top'>
                     <Link to={`/profile/${this.state.profile.id}`}>
                         <img src={profilePicture? profilePicture : BlankPlaceholderPhoto}
                         alt={username}
-                        className="discover__top--img"/>
+                        className="friendslist__top--img"/>
                     </Link>
-                    <h1 className='discover__top--header'
+                    <h1 className='friendslist__top--header'
                     >{name}</h1>
                 </div>
-                <div className='discover__search'>
-                    <img src={Search} className='discover__search--icon' alt='search'/>
+                <div className='friendslist__search'>
+                    <img src={Search} className='friendslist__search--icon' alt='search'/>
                     <input type="text" 
                     id='search'
                     name='search'
-                    className='discover__search--input'
+                    className='friendslist__search--input'
                     placeholder='Search by name...'
                     onChange={this.handleInputChangeSearch}
                     onClick={(event) => {event.target.placeholder = ""}}>
                     </input>
                 </div>
                 {!this.state.search?
-                    <ProfilePreview
+                    <FriendsPreview
                     key={uuid()}
                     id={id}
-                    newfriends={newPossibleFriends}
+                    friends={friends}
                     /> :
-                    <ProfilePreview
+                    <FriendsPreview
                     key={uuid()}
                     id={id}
-                    newfriends={this.state.search? searchResults : newPossibleFriends}
+                    friends={this.state.search? searchResults : friends}
                     />
                 }
             </div>
@@ -152,4 +139,4 @@ class DiscoverPage extends Component{
     }
 };
 
-export default DiscoverPage;
+export default FriendsListPage;
