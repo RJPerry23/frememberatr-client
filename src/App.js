@@ -5,10 +5,10 @@ import { Switch } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import LoginPage from './pages/LoginPage/LoginPage'
 import SignUpPage from './pages/SignUpPage/SignUpPage'
-import ProfilePage from './pages/ProfilePage/ProfilePage'
 import DiscoverPage from './pages/DiscoverPage/DiscoverPage';
 import FriendsListPage from './pages/FriendsListPage/FriendsListPage';
 import EditPage1 from './pages/EditPage1/EditPage1';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 
 class App extends Component {
 
