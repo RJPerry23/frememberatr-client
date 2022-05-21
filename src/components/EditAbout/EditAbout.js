@@ -1,8 +1,5 @@
 import './EditAbout.scss'
 import React, { Component } from 'react';
-// import axios from 'axios';
-
-// const API_URL = process.env.REACT_APP_API_URL
 
 class EditAbout extends Component {
 
@@ -53,7 +50,6 @@ class EditAbout extends Component {
                             className='editabout__bottom--submit'
                             type='submit'
                             value='Submit'
-                            // onClick={handleSubmitAbout}
                             >
                         </input>
                     </div>

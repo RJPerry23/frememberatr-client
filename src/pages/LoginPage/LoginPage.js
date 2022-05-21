@@ -13,8 +13,6 @@ class LoginPage extends Component {
       logInError: "",
       logInSuccess: false,
       userId: null,
-      // flashErrorMessage: false,
-      // flasher: false
     }
 
     //For background animation

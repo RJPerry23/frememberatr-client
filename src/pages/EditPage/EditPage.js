@@ -24,7 +24,7 @@ class EditPage extends Component{
             }
         })
         .then((response) => {
-            this.setState({userAuthenticated: response.data})
+            this.setState({userAuthenticated: response.data.auth})
         })
     }
 

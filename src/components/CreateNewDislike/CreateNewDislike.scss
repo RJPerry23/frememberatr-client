@@ -1,0 +1,99 @@
+.create-new-dislike{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15rem;
+    min-height: 15rem;
+    max-height: auto;
+    border: 1px solid #758BFD;
+    border-radius: 5px;
+    background-color: #b8c2f3;
+    margin-left: calc( (100vw - 16rem)/2);
+    margin-right: calc( (100vw - 19rem)/2);
+    z-index: 2;
+    position: fixed;
+    bottom: 35vh;
+
+    &__input{
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0 0 1rem 0;
+        width: 13rem;
+        height: 8rem;
+        resize: none;
+        border: 1px solid #27187E;
+        border-radius: 5px;
+        background-color: #AEB8FE;
+
+        &:focus{
+            outline: none;
+            border: 1px solid #27187E;
+        }
+
+        &::placeholder{
+            font-family: Arial, Helvetica, sans-serif;
+            color: #27187E;
+        }
+
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #AEB8FE;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #27187E;
+            border-radius: 20px;
+            border: 3px solid #AEB8FE;
+        }
+
+    }
+
+    &__bottom{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 10rem;
+        height: 1.25rem;
+
+        &--cancel{
+            background-color: #758BFD;
+            color: #27187E;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+    
+            &:hover{
+                cursor: pointer;
+                border: 1px solid #27187E;
+            }
+    
+            &:active{
+                cursor: pointer;
+                border: 1px solid #27187E;
+            }
+        }
+
+        &--submit{
+            background-color: #758BFD;
+            color: #27187E;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+    
+            &:hover{
+                cursor: pointer;
+                border: 1px solid #27187E;
+            }
+    
+            &:active{
+                cursor: pointer;
+                border: 1px solid #27187E;
+            }
+        }
+    
+    }
+
+}

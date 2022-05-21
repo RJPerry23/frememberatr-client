@@ -4,9 +4,9 @@ import axios from 'axios';
 import { DotPulse } from '@uiball/loaders'
 import BlankPlaceholderPhoto from '../../assets/images/Blank3x2.jpg'
 import uuid from 'react-uuid';
-import { Link } from 'react-router-dom';
 import FriendsPreview from '../../components/FriendsPreview/FriendsPreview';
 import Search from '../../assets/images/icons/search.svg'
+import Back from '../../assets/images/icons/arrow_back.svg'
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -84,6 +84,10 @@ class FriendsListPage extends Component {
         return searchResults
     }
 
+    handleBack = () => {
+        window.history.go(-1)
+    }
+
     render() {
     //preloader
     if (!this.state.profile) {
@@ -103,15 +107,18 @@ const { name, username, profilePicture, id} = this.state.profile
         return (
             <div className='friendslist'>
                 <div className='friendslist__top'>
-                    <Link to={`/profile/${this.state.profile.id}`}>
                         <img src={profilePicture? profilePicture : BlankPlaceholderPhoto}
                         alt={username}
                         className="friendslist__top--img"/>
-                    </Link>
                     <h1 className='friendslist__top--header'
                     >{name}</h1>
                 </div>
                 <div className='friendslist__search'>
+                    <div className='friendslist__search--back'>
+                        <img src={Back} alt='back'
+                        className='friendslist__search--back--img'
+                        onClick={this.handleBack}/>
+                    </div>
                     <img src={Search} className='friendslist__search--icon' alt='search'/>
                     <input type="text" 
                     id='search'

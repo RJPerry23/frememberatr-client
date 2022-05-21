@@ -2,7 +2,6 @@ import { Component } from 'react';
 import axios from 'axios';
 import './GlobalProfilePage.scss'
 import BlankPlaceholderPhoto from '../../assets/images/Blank3x2.jpg'
-import PersonSearch from '../../assets/images/icons/person_search.svg'
 import AddFriend from '../../assets/images/icons/Add_Friend.svg'
 import Friend from '../../assets/images/icons/friend.svg'
 import Back from '../../assets/images/icons/arrow_back.svg'
@@ -46,6 +45,9 @@ class GlobalProfilePage extends Component{
         })
     }
 
+    handleBack = () => {
+        window.history.go(-1)
+    }
 
     render(){
     //preloader
@@ -79,13 +81,6 @@ class GlobalProfilePage extends Component{
                             alt="explore"/>
                         </div>
                         <div className='global__middle--left icons'>
-                            <Link to={`/discover/${this.state.profile.id}`}>
-                                <img className='img'
-                                src={PersonSearch}
-                                alt="person search"/>
-                            </Link>
-                        </div>
-                        <div className='global__middle--left icons'>
                             <Link to={`/friendslist/${this.state.profile.id}`}>
                                 <img className='img'
                                 src={Friend}
@@ -93,11 +88,10 @@ class GlobalProfilePage extends Component{
                             </Link>
                         </div>
                         <div className='global__middle--left icons'>
-                            <Link to={`/discover/${this.state.profile.id}`}>
                                 <img className='img'
                                 src={Back}
-                                alt="explore"/>
-                            </Link>
+                                alt="explore"
+                                onClick={this.handleBack}/>
                         </div>
                     </div>
                     <div className='global__middle--right'>
