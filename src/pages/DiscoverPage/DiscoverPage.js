@@ -76,7 +76,6 @@ class DiscoverPage extends Component{
             }
         }
         return possibleProfiles.sort(() => Math.random() - 0.5)
-
     }    
 
     handleInputChangeSearch = (event) => {

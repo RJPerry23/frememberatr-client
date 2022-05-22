@@ -88,7 +88,7 @@ class LoginPage extends Component {
                     <input className={this.state.animationClass === "test"?
                     'login__form--password' :
                     'login__form--password--alt'}
-                    type='text'
+                    type='password'
                     placeholder='Password'
                     htmlFor='login'
                     name='password'

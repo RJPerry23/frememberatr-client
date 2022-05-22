@@ -207,7 +207,6 @@ class EditPage1 extends Component{
             </div>
         )
     }
-
         const { name, username, profilePicture} = this.state.profile
     return(
         <div>
