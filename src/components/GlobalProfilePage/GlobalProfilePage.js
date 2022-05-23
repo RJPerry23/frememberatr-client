@@ -4,6 +4,7 @@ import './GlobalProfilePage.scss'
 import BlankPlaceholderPhoto from '../../assets/images/Blank3x2.jpg'
 import AddFriend from '../../assets/images/icons/Add_Friend.svg'
 import PendingFriend from '../../assets/images/icons/Pending_Friend.svg'
+import AcceptedFriend from '../../assets/images/icons/Accepted_Friend.svg'
 import Friend from '../../assets/images/icons/friend.svg'
 import Back from '../../assets/images/icons/arrow_back.svg'
 import { DotPulse } from '@uiball/loaders'
@@ -95,9 +96,18 @@ class GlobalProfilePage extends Component{
         const requests = this.state.friendRequests
         const requestIDs = []
         for (let i=0;i<requests.length;i++){
-                requestIDs.push(requests[i].profile_id)
+            requestIDs.push(requests[i].profile_id)
         }
         return this.removeDuplicates(requestIDs)
+    }
+
+    acceptedFriendRequests = () => {
+        const friends = this.state.friends
+        const friendsIDs = []
+        for (let i=0;i<friends.length;i++){
+            friendsIDs.push(friends[i].profile_id)
+        }
+        return this.removeDuplicates(friendsIDs)
     }
 
     handleBack = () => {
@@ -126,6 +136,7 @@ class GlobalProfilePage extends Component{
         )
     }
     const unansweredFriendRequests = this.pendingFriendRequests()
+    const approvedFriendRequests = this.acceptedFriendRequests()
         const { name, username, profilePicture, id} = this.state.profile
         return(
             <div className='global'>
@@ -139,8 +150,13 @@ class GlobalProfilePage extends Component{
                 <div className='global__middle'>
                     <div className='global__middle--left'>
                         <div className='global__middle--left icons'>
-                            {unansweredFriendRequests.includes(this.state.currentUser)?
-                                <img className='img'
+                            {approvedFriendRequests.includes(this.state.currentUser)? 
+                            <img className='friend'
+                            id={id}
+                            src={AcceptedFriend}
+                            alt="accepted friend"/> :
+                                unansweredFriendRequests.includes(this.state.currentUser)?
+                                <img className='friend'
                                 id={id}
                                 src={PendingFriend}
                                 alt="pending friend"/> :

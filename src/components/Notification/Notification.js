@@ -68,6 +68,46 @@ class Notification extends Component{
         }))
     }
 
+    acceptFriendRequest = (event) => {
+        const user = this.props.user
+        const token = sessionStorage.getItem('token')
+        const newFriendObjOne = {
+            friends: this.state.profile.name,
+            user_id: event.target.id,
+            profile_id: this.state.profile.id
+        }
+        const newFriendID = event.target.id
+        const newFriend = this.state.profiles.find((profile) => profile.id === parseInt(newFriendID))
+        const newFriendObjTwo = {
+            friends: newFriend.name,
+            user_id: this.state.profile.id,
+            profile_id: newFriend.id
+        }
+        axios.delete(`${API_URL}/users/${user}/friendrequests/${event.target.name}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(axios.get(`${API_URL}/users/${user}/friendrequests`)
+           .then((response) => {
+            this.setState({friendRequests: response.data})
+                axios.get(`${API_URL}/users/${user}/profilesandfriendrequests`)   
+                .then((response) => {
+                    this.setState({friendRequestProfiles: response.data})                
+                })    
+        }))
+        .then(axios.post(`${API_URL}/users/${user}/friends/`, newFriendObjOne, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }))
+        .then(axios.post(`${API_URL}/users/${user}/friends/`, newFriendObjTwo, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }))
+    }
+
     render() {
     //preloader
     if (!this.state.friendRequests) {
@@ -118,7 +158,12 @@ class Notification extends Component{
                                 <div className='approval__right'>
                                 <img src={Approve} alt='approve'
                                 className='approval__right--approve'
-                                name={request.id}/>
+                                id={profile.id}
+                                name={request.id}
+                                onClick={(event) => {
+                                    this.acceptFriendRequest(event);
+                                    this.props.updatePage()
+                                }}/>
                                 </div>
                             </div>                  
                         ))}
