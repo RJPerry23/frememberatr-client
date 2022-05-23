@@ -103,11 +103,19 @@ class PersonalProfilePage extends Component{
                         </div>
                         {this.state.friendRequests.length?
                             <div className='profile__middle--left icons'>
+
+                                <Link to={`/notifications/${this.state.profile.id}`}>
                                 <img src={NotificationTrue} alt="you have notifications" 
-                                className='img'/></div> :
+                                className='img'/>
+                                </Link>
+                                </div> :
+
                                 <div className='profile__middle--left icons'>
+                                    <Link to={`/notifications/${this.state.profile.id}`}>
                                     <img src={NotificationFalse} alt="you do not have notifications"
-                                    className='img'/></div>}
+                                    className='img'/>
+                                    </Link>
+                                    </div>}
                     </div>
                     <div className='profile__middle--right'>
                         <h3 className='profile__middle--right likes-heading'>

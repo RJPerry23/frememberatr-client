@@ -1,0 +1,19 @@
+.notification-area{
+overflow-y: scroll;
+scroll-behavior: smooth;
+
+&::-webkit-scrollbar {
+    width: 10px;
+}
+
+&::-webkit-scrollbar-track {
+    background: #AEB8FE;
+    border-radius: 10px;
+}
+
+&::-webkit-scrollbar-thumb {
+    background-color: #27187E;
+    border-radius: 20px;
+    border: 3px solid #AEB8FE;
+}
+}

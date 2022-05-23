@@ -9,6 +9,7 @@ import DiscoverPage from './pages/DiscoverPage/DiscoverPage';
 import FriendsListPage from './pages/FriendsListPage/FriendsListPage';
 import EditPage from './pages/EditPage/EditPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
+import NotificationPage from './pages/NotificationPage/NotificationPage';
 
 class App extends Component {
 
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path="/discover/:user" component={DiscoverPage}/>
             <Route path="/friendslist/:user" component={FriendsListPage}/>
             <Route path='/edit1/:user' component={EditPage}/>
+            <Route path='/notifications/:user' component={NotificationPage}/>
           </Switch>
           </BrowserRouter>
         </div>
