@@ -1,14 +1,16 @@
 import { Component } from 'react';
 import axios from 'axios';
-import './EditPage1.scss'
+import './EditPageOneComponent.scss'
 import BlankPlaceholderPhoto from '../../assets/images/Blank3x2.jpg'
 import EditOn from '../../assets/images/icons/edit_on.svg'
 import EditAboutIcon from '../../assets/images/icons/edit_about.svg'
+import EditNameIcon from '../../assets/images/icons/edit_name.svg'
 import Add from '../../assets/images/icons/Add.svg'
 import Delete from '../../assets/images/icons/Delete.svg'
 import Photo from '../../assets/images/icons/Photo.svg'
 import { DotPulse } from '@uiball/loaders'
 import { Link } from 'react-router-dom';
+import EditName from '../EditName/EditName';
 import EditAbout from '../EditAbout/EditAbout';
 import CreateNewLike from '../CreateNewLike/CreateNewLike';
 import CreateNewDislike from '../CreateNewDislike/CreateNewDislike';
@@ -21,11 +23,11 @@ class EditPage1 extends Component{
         profile: null,
         likes: [],
         dislikes: [],
-        friends: [],
-        friendRequests: [],
+        isEditName: false,
         isEditAbout: false,
         isNewLike: false,
-        isNewDislike: false
+        isNewDislike: false,
+        redirectEditTwo: false
     }
 
     componentDidMount(){
@@ -42,14 +44,6 @@ class EditPage1 extends Component{
         .then((response) => {
             this.setState({dislikes: response.data})
         })
-        axios.get(`${API_URL}/users/${user}/friends`)
-        .then((response) => {
-            this.setState({friends: response.data})
-        })
-        axios.get(`${API_URL}/users/${user}/friendrequests`)
-        .then((response) => {
-            this.setState({friendRequests: response.data})
-        })
         const token = sessionStorage.getItem('token')
         if(!token){
             return this.setState({userAuthenticated: false})
@@ -62,6 +56,34 @@ class EditPage1 extends Component{
         .then((response) => {
             this.setState({userAuthenticated: response.data.auth})
         })
+    }
+
+    handleEditName = (event) => {
+        event.preventDefault()
+        !this.state.isEditName ?
+        this.setState({isEditName: true}) :
+        this.setState({isEditName: false})
+    }
+
+    handleSubmitName = (event) => {
+        event.preventDefault()
+        const user = this.props.user
+        const token = sessionStorage.getItem('token')
+        if (event.target.nameInput.value) {
+            const newName = {
+                name: event.target.nameInput.value
+            }
+            axios.patch(`${API_URL}/users/${user}`, newName, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            .then(
+                !this.state.isEditName ?
+                this.setState({isEditName: true}) :
+                this.setState({isEditName: false})        
+            )
+        }
     }
 
     handleEditAbout = (event) => {
@@ -184,14 +206,6 @@ class EditPage1 extends Component{
         .then((response) => {
             this.setState({dislikes: response.data})
         })
-        axios.get(`${API_URL}/users/${user}/friends`)
-        .then((response) => {
-            this.setState({friends: response.data})
-        })
-        axios.get(`${API_URL}/users/${user}/friendrequests`)
-        .then((response) => {
-            this.setState({friendRequests: response.data})
-        })
     }
 
     render(){
@@ -217,25 +231,36 @@ class EditPage1 extends Component{
                     alt={username}
                     className="editone__top--img"/>
                     </Link>
-                    <h1 className='editone__top--header'
-                    >{name}</h1>
+                    <div className='editone__top--header'>
+                        {name}
+                        <img src={EditNameIcon} 
+                        alt='edit name'
+                        className='editone__top--header--edit'
+                        onClick={this.handleEditName}/>
+                    </div>
                 </div>
                 <div className='editone__middle'>
                     <div className='editone__middle--left'>
                         <div className='editone__middle--left icons'>
-                            <img className='edit'
-                            src={EditOn}
-                            alt="edit off"/>
+                            <Link to={`/profile/${this.state.profile.id}`}>
+                                <img className='edit'
+                                src={EditOn}
+                                alt="edit off"/>
+                            </Link>
                         </div>
                         <div className='editone__middle--left icons'>
-                            <img className='edit'
-                            src={Photo}
-                            alt="camera"/>
+                            <Link to={`/edit2/${this.state.profile.id}`}>
+                                <img className='edit'
+                                src={Photo}
+                                alt="camera"
+                                onClick={this.redirectEditTwo}/>
+                            </Link>
                         </div>
                     </div>
                     <div className='editone__middle--right'>
                         <h3 className='editone__middle--right likes-heading'>
                             <img src={Add} alt='add'
+                            className='editone__middle--right add-icon'
                             onClick={this.handleNewLike}/>
                             Likes
                         </h3>
@@ -254,6 +279,7 @@ class EditPage1 extends Component{
                         </div>
                         <h3 className='editone__middle--right dislikes-heading'>
                             <img src={Add} alt='add'
+                            className='editone__middle--right add-icon'
                             onClick={this.handleNewDislike}/>
                             Dislikes
                         </h3>
@@ -284,6 +310,12 @@ class EditPage1 extends Component{
                     <p className='editone__bottom--about'>{this.state.profile.about}</p>
                 </div>  
             </div>
+            {this.state.isEditName?
+            <EditName 
+            user={this.state.profile} 
+            handleEditName={this.handleEditName}
+            handleSubmitName={this.handleSubmitName}/> 
+            : null}
             {this.state.isEditAbout?
             <EditAbout 
             user={this.state.profile} 

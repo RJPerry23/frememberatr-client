@@ -1,7 +1,7 @@
-import './EditPage.scss'
+import './EditPageOne.scss'
 import React, { Component } from 'react';
 import axios from 'axios';
-import EditPage1 from '../../components/EditPage1/EditPage1'
+import EditPageOneComponent from '../../components/EditPageOneComponent/EditPageOneComponent'
 import ErrorEdit from '../../components/ErrorEdit/ErrorEdit';
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -32,7 +32,7 @@ class EditPage extends Component{
         return (
             <div>
                 {this.state.userAuthenticated?
-                    <EditPage1
+                    <EditPageOneComponent
                     user={this.props.match.params.user}/> :
                         <ErrorEdit/>}
             </div>

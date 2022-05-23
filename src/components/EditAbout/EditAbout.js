@@ -11,6 +11,7 @@ class EditAbout extends Component {
 
     componentDidMount() {
         this.setState({user: this.props.user})
+        this.setState({aboutInput: this.props.user.about})
     }
 
     handleChangeAbout = (event) => {
@@ -37,7 +38,7 @@ class EditAbout extends Component {
                         className='editabout__input'
                         name='aboutInput'
                         id='aboutInput'
-                        placeholder={this.state.user.about}
+                        value={this.state.aboutInput}
                         onChange={this.handleChangeAbout}>
                     </textarea>
                     <div className='editabout__bottom'>

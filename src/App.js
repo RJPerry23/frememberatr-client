@@ -7,7 +7,8 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import SignUpPage from './pages/SignUpPage/SignUpPage'
 import DiscoverPage from './pages/DiscoverPage/DiscoverPage';
 import FriendsListPage from './pages/FriendsListPage/FriendsListPage';
-import EditPage from './pages/EditPage/EditPage';
+import EditPageOne from './pages/EditPageOne/EditPageOne';
+import EditPageTwo from './pages/EditPageTwo/EditPageTwo';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import NotificationPage from './pages/NotificationPage/NotificationPage';
 
@@ -23,7 +24,8 @@ class App extends Component {
             <Route path="/profile/:user" component={ProfilePage}/>
             <Route path="/discover/:user" component={DiscoverPage}/>
             <Route path="/friendslist/:user" component={FriendsListPage}/>
-            <Route path='/edit1/:user' component={EditPage}/>
+            <Route path='/edit1/:user' component={EditPageOne}/>
+            <Route path='/edit2/:user' component={EditPageTwo}/>
             <Route path='/notifications/:user' component={NotificationPage}/>
           </Switch>
           </BrowserRouter>
