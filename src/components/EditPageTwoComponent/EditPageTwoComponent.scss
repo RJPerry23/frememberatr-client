@@ -97,12 +97,89 @@
 
         &--right{
 
-            .likes-heading{
+            .heading{
                 background-color: #AEB8FE;
                 border-radius: 10px;
                 padding: 0.25rem 1rem 0.25rem 1rem;
                 text-align: center;    
-            } 
+            }
+            
+            .input{
+                width: 12rem;
+            }
+
+            .image-preview{
+                width: 10rem;
+                height: 10rem;
+                border-radius: 50%;
+                object-fit:cover;
+                object-position: 25%;
+                background-color: #27187E;
+                position: relative;
+                left: 1rem;
+                bottom: 0.5rem;
+            }
+        }
+    }
+    &__bottom{
+        margin: 2rem 2rem 2rem 2rem;
+        padding: 2rem 2rem 2rem 2rem;
+        background-color: #c23281;
+        border-radius: 5px;
+
+        &--heading{
+            margin: 1rem 1rem 1rem 1rem;
+            color: #FFFFFF;
+            position: relative;
+            bottom: 1rem;
+        }
+
+        .profile-picture{
+            &__bottom{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: 10rem;
+                height: 1.25rem;
+        
+                &--cancel{
+                    background-color: #AEB8FE;
+                    color: #27187E;
+                    border: none;
+                    border-radius: 5px;
+                    font-size: 1rem;
+            
+                    &:hover{
+                        cursor: pointer;
+                        border: 1px solid #27187E;
+                    }
+            
+                    &:active{
+                        cursor: pointer;
+                        border: 1px solid #27187E;
+                    }
+                }
+        
+                &--submit{
+                    background-color: #AEB8FE;
+                    color: #27187E;
+                    border: none;
+                    border-radius: 5px;
+                    font-size: 1rem;
+            
+                    &:hover{
+                        cursor: pointer;
+                        border: 1px solid #27187E;
+                    }
+            
+                    &:active{
+                        cursor: pointer;
+                        border: 1px solid #27187E;
+                    }
+                }
+            
+            }
+        
         }
     }
 }

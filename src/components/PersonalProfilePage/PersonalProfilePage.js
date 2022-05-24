@@ -5,9 +5,10 @@ import BlankPlaceholderPhoto from '../../assets/images/Blank3x2.jpg'
 import PersonSearch from '../../assets/images/icons/person_search.svg'
 import Friend from '../../assets/images/icons/friend.svg'
 import EditOff from '../../assets/images/icons/edit_off.svg'
-import Explore from '../../assets/images/icons/explore.svg'
+import Logout from '../../assets/images/icons/logout.svg'
 import NotificationTrue from '../../assets/images/icons/notification_true.svg'
 import NotificationFalse from '../../assets/images/icons/notification_false.svg'
+import ConfirmLogout from '../ConfirmLogout/ConfirmLogout'
 import { DotPulse } from '@uiball/loaders'
 import { Link } from 'react-router-dom';
 
@@ -21,7 +22,8 @@ class PersonalProfilePage extends Component{
         likes: [],
         dislikes: [],
         friends: [],
-        friendRequests: []
+        friendRequests: [],
+        requestLogout: false
     }
 
     componentDidMount(){
@@ -48,6 +50,18 @@ class PersonalProfilePage extends Component{
         })
     }
 
+    handleRequestLogout = (event) => {
+        event.preventDefault()
+        !this.state.requestLogout ?
+        this.setState({requestLogout: true}) :
+        this.setState({requestLogout: false})
+    }
+
+    handleSubmitLogout = (event) => {
+        event.preventDefault()
+        sessionStorage.removeItem('token')
+        window.location='/'
+    }
 
     render(){
     //preloader
@@ -96,11 +110,6 @@ class PersonalProfilePage extends Component{
                             alt="edit off"/>
                         </Link>
                         </div>
-                        <div className='profile__middle--left icons'>
-                            <img className='img'
-                            src={Explore}
-                            alt="explore"/>
-                        </div>
                         {this.state.friendRequests.length?
                             <div className='profile__middle--left icons'>
 
@@ -116,6 +125,12 @@ class PersonalProfilePage extends Component{
                                     className='img'/>
                                     </Link>
                                     </div>}
+                        <div className='profile__middle--left icons'>
+                            <img className='request-logout'
+                            src={Logout}
+                            alt="logout"
+                            onClick={this.handleRequestLogout}/>
+                        </div>
                     </div>
                     <div className='profile__middle--right'>
                         <h3 className='profile__middle--right likes-heading'>
@@ -138,13 +153,18 @@ class PersonalProfilePage extends Component{
                                 </p>
                             ))}
                         </div>
-
                     </div>
                 </div>
                 <div className='profile__bottom'>
                     <h3 className='profile__bottom--heading'>About</h3>
                     <p className='profile__bottom--about'>{this.state.profile.about}</p>
-                </div>    
+                </div>
+                {this.state.requestLogout?
+                <ConfirmLogout
+                user={this.state.profile} 
+                handleRequestLogout={this.handleRequestLogout}
+                handleSubmitLogout={this.handleSubmitLogout}/> 
+                : null}    
             </div>
         )
     }

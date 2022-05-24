@@ -13,6 +13,8 @@ class EditPage2 extends Component{
 
     state = {
         profile: null,
+        profileImg: "",
+        profileImgFile: "",
     }
 
     componentDidMount(){
@@ -21,6 +23,7 @@ class EditPage2 extends Component{
         axios.get(`${API_URL}/users/${user}`)
         .then((response) => {
             this.setState({profile: response.data})
+            this.setState({profileImg: response.data.profilePicture})
         })
         axios.get(`${API_URL}/users/${user}/authenticate`, {
             headers: {
@@ -30,6 +33,51 @@ class EditPage2 extends Component{
         .then((response) => {
             this.setState({userAuthenticated: response.data.auth})
         })
+    }
+
+    handleImagePreview = (event) => {
+        const reader = new FileReader()
+        reader.onload = () => {
+            if(reader.readyState === 2){
+                this.setState({profileImg: reader.result})
+            }
+        }
+        reader.readAsDataURL(event.target.files[0])
+        this.setState({profileImgFile: event.target.files[0]})
+    }
+
+    handleCancelUpload = () => {
+        this.setState({profileImg: this.state.profile.profilePicture})
+    }
+
+    handleSubmitUpload = (event) => {
+        // event.preventDefault()
+        const user = this.props.user
+        const token = sessionStorage.getItem('token')
+        if (event.target.inputProfileImage.files[0]) {
+            const newProfileImagePath = {
+                profilePicture: `${API_URL}/images/${event.target.inputProfileImage.files[0].name}`
+            }
+        const formData = new FormData()
+        formData.append('image-field', event.target.inputProfileImage.files[0])
+        axios.post(`${API_URL}/upload`, formData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(
+            axios.patch(`${API_URL}/users/${user}`, newProfileImagePath, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            .then(
+                axios.get(`${API_URL}/users/${user}`)
+                .then((response) => {
+                    this.setState({profile: response.data})
+                    this.setState({profileImg: response.data.profilePicture})
+                })
+            )
+        )}
     }
 
     render(){
@@ -48,6 +96,8 @@ class EditPage2 extends Component{
         const { name, username, profilePicture} = this.state.profile
     return(
         <div>
+            <form id='profilePicture' name='profilePicture' 
+            onSubmit={this.handleSubmitUpload}>
             <div className='edittwo'>
                 <div className='edittwo__top'>
                     <Link to={`/profile/${this.state.profile.id}`}>
@@ -75,12 +125,47 @@ class EditPage2 extends Component{
                         </div>
                     </div>
                     <div className='edittwo__middle--right'>
-                        <h3 className='edittwo__middle--right likes-heading'>
+                        <h3 className='edittwo__middle--right heading'>
                             Upload A Picture
                         </h3>
+                        <div className='edittwo__middle--right img-holder'>
+                            <img src={this.state.profileImg? this.state.profileImg :
+                                profilePicture? profilePicture : BlankPlaceholderPhoto} 
+                            alt='profile' id='profileImage'
+                            className='edittwo__middle--right image-preview'/>
+                        </div>
+                        <input type='file' className='edittwo__middle--right input'
+                        id='inputProfileImage' name='inputProfileImage'
+                        accept='image/*' onChange={this.handleImagePreview}>
+                        </input>
                     </div>
                 </div>
+                {this.state.profileImg !== profilePicture?
+            
+                    <div className='edittwo__bottom'>
+                        <h3 className='edittwo__bottom--heading'>
+                            Submit Photo?
+                        </h3>
+                            <div className='profile-picture'>
+                        <div className='profile-picture__bottom'>
+                            <button
+                                className='profile-picture__bottom--cancel'
+                                onClick={this.handleCancelUpload}>
+                                    Cancel
+                            </button>
+                            <input
+                                className='profile-picture__bottom--submit'
+                                type='submit'
+                                value='Submit'
+                                >
+                            </input>
+                            </div>
+                        </div>
+                    </div>
+                    : null
+                }
             </div>
+            </form>
         </div>
         )
     }
