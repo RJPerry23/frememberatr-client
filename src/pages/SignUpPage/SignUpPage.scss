@@ -99,6 +99,9 @@
             left: 0.5rem;
 
             &--back{
+                display: flex;
+                align-items: center; 
+                justify-content: center;   
                 position: relative;
                 top: 0rem;
                 right: 1rem;
@@ -106,6 +109,11 @@
                 border-radius: 50%;
                 width: 2.25rem;
                 height: 2.25rem;
+
+                &--icon{
+                    width: 1.5rem;
+                    height: 1.5rem;    
+                }
 
                 &:hover{
                     cursor: pointer;
@@ -127,6 +135,28 @@
                 }
             }    
         }
+
+        &--error{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            position: relative;
+            bottom: 3.75rem;
+            animation: morph 0.5s infinite;
+            font-weight: 600;
+        }
+
+        &--success{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            position: relative;
+            bottom: 3.75rem;
+            animation: successful 0.5s infinite;
+            font-weight: 600;
+        }
     }
 
     &__sign-up{
@@ -143,5 +173,16 @@
             }
         }
     }
-
 }
+
+@keyframes morph {
+    0% { color: red; }
+    50% { color: rgb(252, 235, 8); }
+    100% { color: red; }
+  }
+
+  @keyframes successful {
+    0% { color: rgb(21, 255, 0); }
+    50% { color: rgb(14, 151, 25); }
+    100% { color: rgb(21, 255, 0); }
+  }

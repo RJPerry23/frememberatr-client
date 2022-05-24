@@ -11,9 +11,10 @@ class SignUpPage extends Component {
 
     state = {
         username: "",
-        errorUsername: false,
+        errorUsername: "",
         password: "",
-        errorPassword: false
+        errorPassword: false,
+        successProfileCreation: "",
     }
 
     hidePlaceHolder = (e) => {
@@ -49,15 +50,42 @@ class SignUpPage extends Component {
                 password: this.state.password
             }
             axios.post(API_URL + '/users', newProfile)
-            .then((response) => {
-                axios.get(API_URL + '/users')
-            })
+            .then(
+                this.setState({
+                    successProfileCreation: "Profile successfully created",
+                    errorUsername: ""
+                })
+            )
+            .catch((err) => 
+            this.setState({
+                errorUsername: err.response.data,
+                successProfileCreation: ""
+            }))
+            // .then((response) => {
+            //     if(this.state.errorUsername === "") {
+            //         this.setState({
+            //             successProfileCreation: "Profile successfully created",
+            //             errorUsername: ""
+            //         })
+            //     }    
+            // })
         }
     }
 
+    // componentDidUpdate(){
+    //     if (this.state.successProfileCreation === "Profile successfully created" 
+    //         && this.state.errorUsername === "") {
+    //         setTimeout(() => {
+    //             window.location = '/'
+    //         }, 2000)
+    //     }
+    // }
+
     render() {
         return (
-            <div className='signup' onClick={this.resetForm}>
+            <div className='signup' 
+            //onClick={this.resetForm}
+            >
                 <img src={Logo} alt="Frememberatr Logo" className='signup__logo'/>
                 <form id='signup' name='signup' className='signup__form'
                 onSubmit={this.handleSignup}>
@@ -71,19 +99,33 @@ class SignUpPage extends Component {
                     onChange={this.handleChangeUsername}>
                     </input>
                     <input className='signup__form--password'
-                    type='text'
+                    type='password'
                     placeholder='Please enter a password'
                     name='password'
                     id='password'
                     onClick={this.hidePlaceHolder}
                     onChange={this.handleChangePassword}>
                     </input>
+
+                    {this.state.successProfileCreation ?
+                      <p className={"signup__form--success"}>
+                        {this.state.successProfileCreation}
+                      </p> :
+                            this.state.errorUsername ?
+                            <p className={"signup__form--error"}>
+                            {this.state.errorUsername}
+                            </p> : null}
+
+                   
+
                     <div className='signup__form--bottom'>
-                        <Link to="/" className='link'>
-                            <img src={ArrowBack} 
-                            alt="Back arrow"
-                            className="signup__form--bottom--back"/>
-                        </Link>
+                        <div className="signup__form--bottom--back">
+                            <Link to="/" className='link'>
+                                <img src={ArrowBack} 
+                                alt="Back arrow"
+                                className="signup__form--bottom--back--icon"/>
+                            </Link>
+                        </div>
                         <input className='signup__form--bottom--submit'
                                 type='submit'
                                 value='Submit'>
