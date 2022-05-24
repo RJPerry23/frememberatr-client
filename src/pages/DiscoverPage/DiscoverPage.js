@@ -121,7 +121,7 @@ class DiscoverPage extends Component{
                         className="discover__top--img"/>
                     </Link>
                     <h1 className='discover__top--header'
-                    >{name}</h1>
+                    >Discover</h1>
                 </div>
                 <div className='discover__search'>
                     <img src={Search} className='discover__search--icon' alt='search'/>

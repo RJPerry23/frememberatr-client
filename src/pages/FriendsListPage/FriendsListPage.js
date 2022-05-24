@@ -7,6 +7,7 @@ import uuid from 'react-uuid';
 import FriendsPreview from '../../components/FriendsPreview/FriendsPreview';
 import Search from '../../assets/images/icons/search.svg'
 import Back from '../../assets/images/icons/arrow_back.svg'
+import { Link } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -107,11 +108,13 @@ const { name, username, profilePicture, id} = this.state.profile
         return (
             <div className='friendslist'>
                 <div className='friendslist__top'>
+                    <Link to={`/profile/${this.state.profile.id}`}>
                         <img src={profilePicture? profilePicture : BlankPlaceholderPhoto}
                         alt={username}
                         className="friendslist__top--img"/>
+                    </Link>
                     <h1 className='friendslist__top--header'
-                    >{name}</h1>
+                    >Friends List</h1>
                 </div>
                 <div className='friendslist__search'>
                     <div className='friendslist__search--back'>

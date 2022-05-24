@@ -33,7 +33,7 @@ class EditName extends Component {
                         <input
                             className='logout__bottom--submit'
                             type='submit'
-                            value='Submit'
+                            value='Logout'
                             >
                         </input>
                     </div>
