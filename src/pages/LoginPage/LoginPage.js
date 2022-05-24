@@ -112,7 +112,6 @@ class LoginPage extends Component {
 
                 {this.state.success && <Redirect to={"/profile/" + this.state.userId} />}
 
-
                 <div className='login__bottom'>
                     <p className={this.state.animationClass === "test"?
                     'login__bottom--sign-up' :
