@@ -61,25 +61,8 @@ class SignUpPage extends Component {
                 errorUsername: err.response.data,
                 successProfileCreation: ""
             }))
-            // .then((response) => {
-            //     if(this.state.errorUsername === "") {
-            //         this.setState({
-            //             successProfileCreation: "Profile successfully created",
-            //             errorUsername: ""
-            //         })
-            //     }    
-            // })
         }
     }
-
-    // componentDidUpdate(){
-    //     if (this.state.successProfileCreation === "Profile successfully created" 
-    //         && this.state.errorUsername === "") {
-    //         setTimeout(() => {
-    //             window.location = '/'
-    //         }, 2000)
-    //     }
-    // }
 
     render() {
         return (
