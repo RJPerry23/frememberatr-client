@@ -17,4 +17,4 @@ To run this app, navigate to the directory it's stored under and install all dep
 
 Then, start it with the command 'npm start.'
 
-Create a profile, build it out, and have your friends and family do the same. Never again will anyone need to ask what someone likes or dislikes.
+Create a profile, build it out, and have your friends and family do the same. Never again will anyone need to ask what someone likes or dislikes, they will simply 'fremember'!
