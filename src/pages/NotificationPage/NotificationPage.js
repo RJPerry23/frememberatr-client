@@ -68,7 +68,7 @@ class NotificationPage extends Component {
                         onClick={this.handleBack}/>
                     </div>
                     <h1 className='notification-page__top--header'
-                    >{this.state.friendRequestsLength} Notifications</h1>
+                    >{this.state.friendRequestsLength} Friend Requests</h1>
                 </div>
                 <NotificationArea
                     key={uuid()}
