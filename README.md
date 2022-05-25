@@ -11,6 +11,8 @@ human brain, simply log on to your Frememberatr profile and look up what you nee
 Each user makes their own profile and simply creates a collection log of things they like, and
 things they don’t like.
 
+This app must be used with the frememberatr-server, which is another repository on my GitHub account. Please download and start that server first, before attempting to use the client.
+
 To run this app, navigate to the directory it's stored under and install all dependencies by using the terminal command 'npm i'.
 
 Then, start it with the command 'npm start.'
