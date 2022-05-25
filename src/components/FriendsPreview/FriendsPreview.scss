@@ -1,0 +1,42 @@
+.preview{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 16rem;
+    margin: 0.75rem 1.5rem 0.75rem 1.5rem;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    text-decoration: none;
+
+    &__left{
+        margin: 0 1rem 0 0.5rem;
+        position: relative;
+        top: 0.5rem;
+
+        &--img{
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            object-fit:cover;
+            object-position: 25% 0%;
+            background-color: #27187E;
+        }
+    }
+
+    &__right{
+
+        &--name{
+            font-size: 1.1rem;
+            margin: 0.5rem 0 0 0;
+            color: #000000;
+        }
+
+        &--about{
+            font-size: 0.75rem;
+            margin: 0;
+            height: 2.75rem;
+            overflow: hidden;
+            color: #000000;
+        }
+    }
+}
