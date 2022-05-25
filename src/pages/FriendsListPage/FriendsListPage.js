@@ -104,7 +104,7 @@ class FriendsListPage extends Component {
     }
 const friends = this.findFriends().slice(0, 5)
 const searchResults = this.searchForFriends()
-const { name, username, profilePicture, id} = this.state.profile
+const { username, profilePicture, id} = this.state.profile
         return (
             <div className='friendslist'>
                 <div className='friendslist__top'>

@@ -111,7 +111,7 @@ class DiscoverPage extends Component{
     }
     const newPossibleFriends = this.findPossibleFriends().slice(0, 5);
     const searchResults = this.searchForFriends()
-    const { name, username, profilePicture, id} = this.state.profile
+    const { username, profilePicture, id} = this.state.profile
         return (
             <div className='discover'>
                 <div className='discover__top'>
